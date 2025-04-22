@@ -1,0 +1,2469 @@
+@prefix : <http://semanticwebcoronel.kesug.com/turismo/Turismo#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://semanticwebcoronel.kesug.com/turismo/Turismo#> .
+
+<http://semanticwebcoronel.kesug.com/turismo/Turismo> rdf:type owl:Ontology .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled
+<http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#compran
+:compran rdf:type owl:ObjectProperty ;
+         owl:inverseOf :esVendidoA .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#destino
+:destino rdf:type owl:ObjectProperty ;
+         rdfs:domain :PaqueteTuristico ;
+         rdfs:range :DestinoTuristico .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#esVendidoA
+:esVendidoA rdf:type owl:ObjectProperty ;
+            rdfs:domain :PaqueteTuristico ;
+            rdfs:range :Turista .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#genero
+:genero rdf:type owl:ObjectProperty ;
+        rdfs:domain :Turista ;
+        rdfs:range :Genero .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#ofrece
+:ofrece rdf:type owl:ObjectProperty ;
+        owl:inverseOf :ofrecidoPor .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#ofreceActividad
+:ofreceActividad rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf :ofrece ;
+                 rdfs:domain [ rdf:type owl:Class ;
+                               owl:unionOf ( :Alojamiento
+                                             :PaqueteTuristico
+                                             :Ubicacion
+                                           )
+                             ] ;
+                 rdfs:range :Actividad .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#ofreceHospedaje
+:ofreceHospedaje rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf :ofrece ;
+                 rdfs:domain [ rdf:type owl:Class ;
+                               owl:unionOf ( :PaqueteTuristico
+                                             :Ubicacion
+                                           )
+                             ] ;
+                 rdfs:range :Alojamiento .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#ofreceTransporte
+:ofreceTransporte rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf :ofrece ;
+                  rdfs:domain [ rdf:type owl:Class ;
+                                owl:unionOf ( :PaqueteTuristico
+                                              :Ubicacion
+                                            )
+                              ] ;
+                  rdfs:range :Transporte .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#ofrecidoPor
+:ofrecidoPor rdf:type owl:ObjectProperty .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#tiene
+:tiene rdf:type owl:ObjectProperty ;
+       owl:inverseOf :ubicadoEn .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#tieneDescuento
+:tieneDescuento rdf:type owl:ObjectProperty ;
+                rdfs:domain [ rdf:type owl:Class ;
+                              owl:unionOf ( :PaqueteTuristico
+                                            :Turista
+                                          )
+                            ] ;
+                rdfs:range :Descuento .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#ubicadoEn
+:ubicadoEn rdf:type owl:ObjectProperty ;
+           rdfs:domain [ rdf:type owl:Class ;
+                         owl:unionOf ( :Alojamiento
+                                       :DestinoTuristico
+                                       :Ubicacion
+                                     )
+                       ] ;
+           rdfs:range :Ubicacion .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#ubicadoEnCiudad
+:ubicadoEnCiudad rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf :ubicadoEn ;
+                 rdfs:range :Ciudad .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#ubicadoEnMontaña
+:ubicadoEnMontaña rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf :ubicadoEn ;
+                  rdfs:range :Montaña .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#ubicadoEnPlaya
+:ubicadoEnPlaya rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf :ubicadoEn ;
+                rdfs:range :Playa .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#vende
+:vende rdf:type owl:ObjectProperty ;
+       owl:inverseOf :vendidoPor ;
+       rdfs:domain :AgenciaDeTurismo ;
+       rdfs:range :PaqueteTuristico .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#vendidoPor
+:vendidoPor rdf:type owl:ObjectProperty .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#viajaCon
+:viajaCon rdf:type owl:ObjectProperty ;
+          owl:inverseOf :viajaCon ;
+          rdf:type owl:SymmetricProperty ;
+          rdfs:domain :Turista ;
+          rdfs:range :Turista .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#capacidad
+:capacidad rdf:type owl:DatatypeProperty ;
+           rdfs:domain :Transporte ;
+           rdfs:range xsd:int .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#edad
+:edad rdf:type owl:DatatypeProperty ;
+      rdfs:domain :Turista ;
+      rdfs:range xsd:int .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#precio
+:precio rdf:type owl:DatatypeProperty ;
+        rdfs:domain :Alojamiento ;
+        rdfs:range xsd:double .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#precioPaqueteTuristico
+:precioPaqueteTuristico rdf:type owl:DatatypeProperty ;
+                        rdfs:domain :PaqueteTuristico ;
+                        rdfs:range xsd:double .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#tieneAeropuerto
+:tieneAeropuerto rdf:type owl:DatatypeProperty ;
+                 rdfs:subPropertyOf :tieneEstacion .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#tieneDesc
+:tieneDesc rdf:type owl:DatatypeProperty ;
+           rdfs:domain :Turista ;
+           rdfs:range xsd:boolean .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#tieneEstacion
+:tieneEstacion rdf:type owl:DatatypeProperty ;
+               rdfs:domain :Ubicacion ;
+               rdfs:range xsd:boolean .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#tieneEstacionTren
+:tieneEstacionTren rdf:type owl:DatatypeProperty ;
+                   rdfs:subPropertyOf :tieneEstacion .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#tieneFecha
+:tieneFecha rdf:type owl:DatatypeProperty ;
+            rdfs:domain :PaqueteTuristico ;
+            rdfs:range xsd:dateTime .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#tieneNombre
+:tieneNombre rdf:type owl:DatatypeProperty ;
+             rdfs:subPropertyOf owl:topDataProperty ;
+             rdfs:domain [ rdf:type owl:Class ;
+                           owl:unionOf ( :Actividad
+                                         :AgenciaDeTurismo
+                                         :Alojamiento
+                                         :Turista
+                                         :Ubicacion
+                                       )
+                         ] ;
+             rdfs:range xsd:string .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#tienePuerto
+:tienePuerto rdf:type owl:DatatypeProperty ;
+             rdfs:subPropertyOf :tieneEstacion .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#tieneTerminal
+:tieneTerminal rdf:type owl:DatatypeProperty ;
+               rdfs:subPropertyOf :tieneEstacion .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#vendidoEnElMes
+:vendidoEnElMes rdf:type owl:DatatypeProperty ;
+                rdfs:domain :PaqueteTuristico ;
+                rdfs:range xsd:integer .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#viajaPorAgua
+:viajaPorAgua rdf:type owl:DatatypeProperty ;
+              rdfs:domain :Lancha ;
+              rdfs:range xsd:boolean .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#viajaPorAire
+:viajaPorAire rdf:type owl:DatatypeProperty ;
+              rdfs:domain :Avion ;
+              rdfs:range xsd:boolean .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#viajaPorCarretera
+:viajaPorCarretera rdf:type owl:DatatypeProperty ;
+                   rdfs:domain :Autobus ;
+                   rdfs:range xsd:boolean .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#viajaPorRieles
+:viajaPorRieles rdf:type owl:DatatypeProperty ;
+                rdfs:domain :Tren ;
+                rdfs:range xsd:boolean .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#Actividad
+:Actividad rdf:type owl:Class .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#ActividadesCulturales
+:ActividadesCulturales rdf:type owl:Class ;
+                       rdfs:subClassOf :Actividad .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#ActividadesDeEntretenimiento
+:ActividadesDeEntretenimiento rdf:type owl:Class ;
+                              rdfs:subClassOf :Actividad .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#ActividadesDeportivas
+:ActividadesDeportivas rdf:type owl:Class ;
+                       rdfs:subClassOf :Actividad .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#AgenciaDeTurismo
+:AgenciaDeTurismo rdf:type owl:Class .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#Alojamiento
+:Alojamiento rdf:type owl:Class .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#Autobus
+:Autobus rdf:type owl:Class ;
+         owl:equivalentClass [ owl:intersectionOf ( :Transporte
+                                                    [ rdf:type owl:Restriction ;
+                                                      owl:onProperty :capacidad ;
+                                                      owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                           owl:intersectionOf ( [ rdf:type rdfs:Datatype ;
+                                                                                                  owl:onDatatype xsd:integer ;
+                                                                                                  owl:withRestrictions ( [ xsd:minInclusive 16
+                                                                                                                         ]
+                                                                                                                       )
+                                                                                                ]
+                                                                                                [ rdf:type rdfs:Datatype ;
+                                                                                                  owl:onDatatype xsd:integer ;
+                                                                                                  owl:withRestrictions ( [ xsd:maxInclusive 70
+                                                                                                                         ]
+                                                                                                                       )
+                                                                                                ]
+                                                                                              )
+                                                                         ]
+                                                    ]
+                                                  ) ;
+                               rdf:type owl:Class
+                             ] ;
+         rdfs:subClassOf :Transporte .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#Avion
+:Avion rdf:type owl:Class ;
+       owl:equivalentClass [ owl:intersectionOf ( :Transporte
+                                                  [ rdf:type owl:Restriction ;
+                                                    owl:onProperty :capacidad ;
+                                                    owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                         owl:intersectionOf ( [ rdf:type rdfs:Datatype ;
+                                                                                                owl:onDatatype xsd:integer ;
+                                                                                                owl:withRestrictions ( [ xsd:minInclusive 71
+                                                                                                                       ]
+                                                                                                                     )
+                                                                                              ]
+                                                                                              [ rdf:type rdfs:Datatype ;
+                                                                                                owl:onDatatype xsd:integer ;
+                                                                                                owl:withRestrictions ( [ xsd:maxInclusive 150
+                                                                                                                       ]
+                                                                                                                     )
+                                                                                              ]
+                                                                                            )
+                                                                       ]
+                                                  ]
+                                                ) ;
+                             rdf:type owl:Class
+                           ] ;
+       rdfs:subClassOf :Transporte .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#Ciudad
+:Ciudad rdf:type owl:Class ;
+        rdfs:subClassOf :Ubicacion .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#DescNiños
+:DescNiños rdf:type owl:Class ;
+           rdfs:subClassOf :Descuento .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#DescPorTemporada
+:DescPorTemporada rdf:type owl:Class ;
+                  rdfs:subClassOf :Descuento .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#DescTerceraEdad
+:DescTerceraEdad rdf:type owl:Class ;
+                 rdfs:subClassOf :Descuento .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#Descuento
+:Descuento rdf:type owl:Class .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#DestinoCultural
+:DestinoCultural rdf:type owl:Class ;
+                 owl:equivalentClass [ owl:intersectionOf ( :DestinoTuristico
+                                                            [ rdf:type owl:Restriction ;
+                                                              owl:onProperty :ofreceActividad ;
+                                                              owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                              owl:onClass :ActividadesCulturales
+                                                            ]
+                                                          ) ;
+                                       rdf:type owl:Class
+                                     ] ;
+                 rdfs:subClassOf :DestinoTuristico .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#DestinoDeEntretenimiento
+:DestinoDeEntretenimiento rdf:type owl:Class ;
+                          owl:equivalentClass [ owl:intersectionOf ( :DestinoTuristico
+                                                                     [ rdf:type owl:Restriction ;
+                                                                       owl:onProperty :ofreceActividad ;
+                                                                       owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                       owl:onClass :ActividadesDeEntretenimiento
+                                                                     ]
+                                                                   ) ;
+                                                rdf:type owl:Class
+                                              ] ;
+                          rdfs:subClassOf :DestinoTuristico .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#DestinoDeportivo
+:DestinoDeportivo rdf:type owl:Class ;
+                  owl:equivalentClass [ owl:intersectionOf ( :DestinoTuristico
+                                                             [ rdf:type owl:Restriction ;
+                                                               owl:onProperty :ofreceActividad ;
+                                                               owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                               owl:onClass :ActividadesDeportivas
+                                                             ]
+                                                           ) ;
+                                        rdf:type owl:Class
+                                      ] ;
+                  rdfs:subClassOf :DestinoTuristico .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#DestinoTuristico
+:DestinoTuristico rdf:type owl:Class .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#Femenino
+:Femenino rdf:type owl:Class ;
+          rdfs:subClassOf :Genero .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#Genero
+:Genero rdf:type owl:Class .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#Glamping
+:Glamping rdf:type owl:Class ;
+          rdfs:subClassOf :Alojamiento .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#Hotel
+:Hotel rdf:type owl:Class ;
+       rdfs:subClassOf :Alojamiento .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#HotelDeLujo
+:HotelDeLujo rdf:type owl:Class ;
+             rdfs:subClassOf :Hotel .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#HotelEconomico
+:HotelEconomico rdf:type owl:Class ;
+                rdfs:subClassOf :Hotel .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#Lancha
+:Lancha rdf:type owl:Class ;
+        owl:equivalentClass [ owl:intersectionOf ( :Transporte
+                                                   [ rdf:type owl:Restriction ;
+                                                     owl:onProperty :capacidad ;
+                                                     owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                          owl:onDatatype xsd:integer ;
+                                                                          owl:withRestrictions ( [ xsd:maxExclusive 15
+                                                                                                 ]
+                                                                                               )
+                                                                        ]
+                                                   ]
+                                                 ) ;
+                              rdf:type owl:Class
+                            ] ;
+        rdfs:subClassOf :Transporte .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#Masculino
+:Masculino rdf:type owl:Class ;
+           rdfs:subClassOf :Genero .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#Montaña
+:Montaña rdf:type owl:Class ;
+         rdfs:subClassOf :Ubicacion .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#PaqueteCultural
+:PaqueteCultural rdf:type owl:Class ;
+                 owl:equivalentClass [ owl:intersectionOf ( :PaqueteTuristico
+                                                            [ rdf:type owl:Restriction ;
+                                                              owl:onProperty :destino ;
+                                                              owl:someValuesFrom :DestinoCultural
+                                                            ]
+                                                          ) ;
+                                       rdf:type owl:Class
+                                     ] ;
+                 rdfs:subClassOf :PaqueteTuristico .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#PaqueteDeEntretenimiento
+:PaqueteDeEntretenimiento rdf:type owl:Class ;
+                          owl:equivalentClass [ owl:intersectionOf ( :PaqueteTuristico
+                                                                     [ rdf:type owl:Restriction ;
+                                                                       owl:onProperty :destino ;
+                                                                       owl:someValuesFrom :DestinoDeEntretenimiento
+                                                                     ]
+                                                                   ) ;
+                                                rdf:type owl:Class
+                                              ] ;
+                          rdfs:subClassOf :PaqueteTuristico .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#PaqueteDeportivo
+:PaqueteDeportivo rdf:type owl:Class ;
+                  owl:equivalentClass [ owl:intersectionOf ( :PaqueteTuristico
+                                                             [ rdf:type owl:Restriction ;
+                                                               owl:onProperty :destino ;
+                                                               owl:someValuesFrom :DestinoDeportivo
+                                                             ]
+                                                           ) ;
+                                        rdf:type owl:Class
+                                      ] ;
+                  rdfs:subClassOf :PaqueteTuristico .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#PaqueteTuristico
+:PaqueteTuristico rdf:type owl:Class .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#Playa
+:Playa rdf:type owl:Class ;
+       rdfs:subClassOf :Ubicacion .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#Resort
+:Resort rdf:type owl:Class ;
+        rdfs:subClassOf :Alojamiento .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#Transporte
+:Transporte rdf:type owl:Class .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#Tren
+:Tren rdf:type owl:Class ;
+      owl:equivalentClass [ owl:intersectionOf ( :Transporte
+                                                 [ rdf:type owl:Restriction ;
+                                                   owl:onProperty :capacidad ;
+                                                   owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                        owl:onDatatype xsd:integer ;
+                                                                        owl:withRestrictions ( [ xsd:minExclusive 150
+                                                                                               ]
+                                                                                             )
+                                                                      ]
+                                                 ]
+                                               ) ;
+                            rdf:type owl:Class
+                          ] ;
+      rdfs:subClassOf :Transporte .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#Turista
+:Turista rdf:type owl:Class .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#TuristaAdulto
+:TuristaAdulto rdf:type owl:Class ;
+               owl:equivalentClass [ owl:intersectionOf ( :TuristaMayorDeEdad
+                                                          [ rdf:type owl:Restriction ;
+                                                            owl:onProperty :edad ;
+                                                            owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                                 owl:intersectionOf ( [ rdf:type rdfs:Datatype ;
+                                                                                                        owl:onDatatype xsd:integer ;
+                                                                                                        owl:withRestrictions ( [ xsd:minInclusive 18
+                                                                                                                               ]
+                                                                                                                             )
+                                                                                                      ]
+                                                                                                      [ rdf:type rdfs:Datatype ;
+                                                                                                        owl:onDatatype xsd:integer ;
+                                                                                                        owl:withRestrictions ( [ xsd:maxExclusive 65
+                                                                                                                               ]
+                                                                                                                             )
+                                                                                                      ]
+                                                                                                    )
+                                                                               ]
+                                                          ]
+                                                        ) ;
+                                     rdf:type owl:Class
+                                   ] ;
+               rdfs:subClassOf :TuristaMayorDeEdad .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#TuristaAdultoMayor
+:TuristaAdultoMayor rdf:type owl:Class ;
+                    owl:equivalentClass [ owl:intersectionOf ( :TuristaMayorDeEdad
+                                                               [ rdf:type owl:Restriction ;
+                                                                 owl:onProperty :edad ;
+                                                                 owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                                      owl:onDatatype xsd:integer ;
+                                                                                      owl:withRestrictions ( [ xsd:minInclusive 65
+                                                                                                             ]
+                                                                                                           )
+                                                                                    ]
+                                                               ]
+                                                             ) ;
+                                          rdf:type owl:Class
+                                        ] ;
+                    rdfs:subClassOf :TuristaMayorDeEdad .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#TuristaMayorDeEdad
+:TuristaMayorDeEdad rdf:type owl:Class ;
+                    owl:equivalentClass [ owl:intersectionOf ( :Turista
+                                                               [ rdf:type owl:Restriction ;
+                                                                 owl:onProperty :edad ;
+                                                                 owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                                      owl:onDatatype xsd:integer ;
+                                                                                      owl:withRestrictions ( [ xsd:minInclusive 18
+                                                                                                             ]
+                                                                                                           )
+                                                                                    ]
+                                                               ]
+                                                             ) ;
+                                          rdf:type owl:Class
+                                        ] ;
+                    rdfs:subClassOf :Turista .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#TuristaMenorDeEdad
+:TuristaMenorDeEdad rdf:type owl:Class ;
+                    owl:equivalentClass [ owl:intersectionOf ( :Turista
+                                                               [ rdf:type owl:Restriction ;
+                                                                 owl:onProperty :edad ;
+                                                                 owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                                      owl:onDatatype xsd:integer ;
+                                                                                      owl:withRestrictions ( [ xsd:maxInclusive 17
+                                                                                                             ]
+                                                                                                           )
+                                                                                    ]
+                                                               ]
+                                                             ) ;
+                                          rdf:type owl:Class
+                                        ] ;
+                    rdfs:subClassOf :Turista .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#Ubicacion
+:Ubicacion rdf:type owl:Class .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#actividadCultural1
+:actividadCultural1 rdf:type owl:NamedIndividual ,
+                             :Actividad ,
+                             :ActividadesCulturales ;
+                    :ofrecidoPor :destinoTuristico1 ,
+                                 :destinoTuristico2 ,
+                                 :hotel3 ,
+                                 :paqueteTuristico1 ,
+                                 :paqueteTuristico6 ;
+                    :tieneNombre "Visitar museos y galerías de arte" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#actividadCultural2
+:actividadCultural2 rdf:type owl:NamedIndividual ,
+                             :Actividad ,
+                             :ActividadesCulturales ;
+                    :ofrecidoPor :destinoTuristico1 ,
+                                 :destinoTuristico2 ,
+                                 :destinoTuristico3 ,
+                                 :paqueteTuristico1 ,
+                                 :paqueteTuristico6 ;
+                    :tieneNombre "Recorrer sitios históricos" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#actividadCultural3
+:actividadCultural3 rdf:type owl:NamedIndividual ,
+                             :Actividad ,
+                             :ActividadesCulturales ;
+                    :ofrecidoPor :destinoTuristico1 ,
+                                 :destinoTuristico2 ,
+                                 :glamping1 ,
+                                 :glamping2 ,
+                                 :glamping3 ,
+                                 :hotel1 ,
+                                 :hotel3 ,
+                                 :hotel5 ,
+                                 :paqueteTuristico1 ,
+                                 :paqueteTuristico6 ,
+                                 :resort1 ,
+                                 :resort2 ,
+                                 :resort3 ;
+                    :tieneNombre "Probar la comida local" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#actividadDeEntretenimiento1
+:actividadDeEntretenimiento1 rdf:type owl:NamedIndividual ,
+                                      :Actividad ,
+                                      :ActividadesDeEntretenimiento ;
+                             :ofrecidoPor :destinoTuristico10 ,
+                                          :destinoTuristico6 ,
+                                          :glamping1 ,
+                                          :paqueteTuristico2 ,
+                                          :paqueteTuristico4 ;
+                             :tieneNombre "Parques temáticos y atracciones" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#actividadDeEntretenimiento2
+:actividadDeEntretenimiento2 rdf:type owl:NamedIndividual ,
+                                      :Actividad ,
+                                      :ActividadesDeEntretenimiento ;
+                             :ofrecidoPor :destinoTuristico4 ,
+                                          :destinoTuristico5 ,
+                                          :hotel1 ,
+                                          :hotel2 ,
+                                          :paqueteTuristico2 ,
+                                          :paqueteTuristico6 ,
+                                          :resort1 ,
+                                          :resort2 ,
+                                          :resort3 ;
+                             :tieneNombre "Discotecas y vida nocturna" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#actividadDeEntretenimiento3
+:actividadDeEntretenimiento3 rdf:type owl:NamedIndividual ,
+                                      :Actividad ,
+                                      :ActividadesDeEntretenimiento ;
+                             :ofrecidoPor :destinoTuristico10 ,
+                                          :destinoTuristico6 ,
+                                          :glamping3 ,
+                                          :hotel3 ,
+                                          :paqueteTuristico2 ,
+                                          :paqueteTuristico4 ,
+                                          :resort1 ,
+                                          :resort2 ,
+                                          :resort3 ;
+                             :tieneNombre "Espectáculos en vivo" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#actividadDeportiva1
+:actividadDeportiva1 rdf:type owl:NamedIndividual ,
+                              :Actividad ,
+                              :ActividadesDeportivas ;
+                     :ofrecidoPor :destinoTuristico11 ,
+                                  :destinoTuristico13 ,
+                                  :destinoTuristico9 ,
+                                  :glamping1 ,
+                                  :glamping2 ,
+                                  :glamping3 ,
+                                  :paqueteTuristico3 ,
+                                  :paqueteTuristico5 ;
+                     :tieneNombre "Senderismo y Trekking" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#actividadDeportiva2
+:actividadDeportiva2 rdf:type owl:NamedIndividual ,
+                              :Actividad ,
+                              :ActividadesDeportivas ;
+                     :ofrecidoPor :destinoTuristico10 ,
+                                  :destinoTuristico12 ,
+                                  :destinoTuristico14 ,
+                                  :destinoTuristico8 ,
+                                  :glamping1 ,
+                                  :glamping2 ,
+                                  :paqueteTuristico3 ,
+                                  :paqueteTuristico4 ,
+                                  :paqueteTuristico5 ,
+                                  :paqueteTuristico6 ,
+                                  :resort1 ,
+                                  :resort2 ,
+                                  :resort3 ;
+                     :tieneNombre "Deportes acuáticos" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#actividadDeportiva3
+:actividadDeportiva3 rdf:type owl:NamedIndividual ,
+                              :Actividad ,
+                              :ActividadesDeportivas ;
+                     :ofrecidoPor :destinoTuristico11 ,
+                                  :destinoTuristico12 ,
+                                  :destinoTuristico14 ,
+                                  :destinoTuristico15 ,
+                                  :destinoTuristico7 ,
+                                  :destinoTuristico8 ,
+                                  :glamping1 ,
+                                  :glamping2 ,
+                                  :paqueteTuristico3 ,
+                                  :paqueteTuristico4 ,
+                                  :paqueteTuristico5 ,
+                                  :paqueteTuristico6 ,
+                                  :resort1 ,
+                                  :resort2 ,
+                                  :resort3 ;
+                     :tieneNombre "Deportes de equipo o individuales" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#agencia1
+:agencia1 rdf:type owl:NamedIndividual ,
+                   :AgenciaDeTurismo ;
+          :vende :paqueteTuristico1 ;
+          :tieneNombre "SolCaribe" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#agencia2
+:agencia2 rdf:type owl:NamedIndividual ,
+                   :AgenciaDeTurismo ;
+          :vende :paqueteTuristico2 ;
+          :tieneNombre "Travel Time Ecuador" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#agencia3
+:agencia3 rdf:type owl:NamedIndividual ,
+                   :AgenciaDeTurismo ;
+          :vende :paqueteTuristico3 ;
+          :tieneNombre "Cite Tour" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#autobus1
+:autobus1 rdf:type owl:NamedIndividual ,
+                   :Autobus ,
+                   :Transporte ;
+          :ofrecidoPor :ciudad1 ,
+                       :ciudad2 ,
+                       :ciudad3 ,
+                       :montaña1 ,
+                       :montaña2 ,
+                       :montaña3 ,
+                       :playa1 ,
+                       :playa3 ;
+          :capacidad 25 ;
+          :viajaPorCarretera "true"^^xsd:boolean .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#avion1
+:avion1 rdf:type owl:NamedIndividual ,
+                 :Avion ,
+                 :Transporte ;
+        :ofrecidoPor :ciudad1 ,
+                     :ciudad2 ,
+                     :playa1 ,
+                     :playa2 ;
+        :capacidad 130 ;
+        :viajaPorAire "true"^^xsd:boolean .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#ciudad1
+:ciudad1 rdf:type owl:NamedIndividual ,
+                  :Ciudad ,
+                  :Ubicacion ;
+         :ofrece :autobus1 ,
+                 :avion1 ;
+         :ofreceTransporte :autobus1 ,
+                           :avion1 ;
+         :tiene :destinoTuristico1 ,
+                :destinoTuristico4 ,
+                :destinoTuristico7 ,
+                :hotel1 ,
+                :hotel2 ,
+                :paqueteTuristico1 ,
+                :paqueteTuristico2 ,
+                :paqueteTuristico3 ,
+                :paqueteTuristico6 ;
+         :tieneAeropuerto "true"^^xsd:boolean ;
+         :tieneEstacion "true"^^xsd:boolean ;
+         :tieneNombre "Cuenca" ;
+         :tieneTerminal "true"^^xsd:boolean .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#ciudad2
+:ciudad2 rdf:type owl:NamedIndividual ,
+                  :Ciudad ,
+                  :Ubicacion ;
+         :ofrece :autobus1 ,
+                 :avion1 ;
+         :ofreceTransporte :autobus1 ,
+                           :avion1 ;
+         :tiene :destinoTuristico2 ,
+                :destinoTuristico5 ,
+                :destinoTuristico8 ,
+                :hotel3 ,
+                :hotel4 ,
+                :paqueteTuristico1 ,
+                :paqueteTuristico2 ,
+                :paqueteTuristico3 ;
+         :tieneAeropuerto "true"^^xsd:boolean ;
+         :tieneEstacion "true"^^xsd:boolean ;
+         :tieneNombre "Quito" ;
+         :tieneTerminal "true"^^xsd:boolean .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#ciudad3
+:ciudad3 rdf:type owl:NamedIndividual ,
+                  :Ciudad ,
+                  :Ubicacion ;
+         :ofrece :autobus1 ,
+                 :tren1 ;
+         :ofreceTransporte :autobus1 ,
+                           :tren1 ;
+         :tiene :destinoTuristico3 ,
+                :destinoTuristico6 ,
+                :destinoTuristico9 ,
+                :hotel5 ,
+                :hotel6 ,
+                :paqueteTuristico1 ,
+                :paqueteTuristico2 ,
+                :paqueteTuristico3 ;
+         :tieneEstacion "true"^^xsd:boolean ;
+         :tieneEstacionTren "true"^^xsd:boolean ;
+         :tieneNombre "Alausi" ;
+         :tieneTerminal "true"^^xsd:boolean .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#descNiños
+:descNiños rdf:type owl:NamedIndividual ,
+                    :DescNiños ,
+                    :Descuento .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#descPorTemporada
+:descPorTemporada rdf:type owl:NamedIndividual ,
+                           :DescPorTemporada ,
+                           :Descuento .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#descTerceraEdad
+:descTerceraEdad rdf:type owl:NamedIndividual ,
+                          :DescTerceraEdad ,
+                          :Descuento .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#destinoTuristico1
+:destinoTuristico1 rdf:type owl:NamedIndividual ,
+                            :DestinoCultural ,
+                            :DestinoTuristico ;
+                   :ofrece :actividadCultural1 ,
+                           :actividadCultural2 ,
+                           :actividadCultural3 ;
+                   :ofreceActividad :actividadCultural1 ,
+                                    :actividadCultural2 ,
+                                    :actividadCultural3 ;
+                   :ubicadoEn :ciudad1 ;
+                   :ubicadoEnCiudad :ciudad1 ;
+                   :tieneNombre "Museo Pumapungo" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#destinoTuristico10
+:destinoTuristico10 rdf:type owl:NamedIndividual ,
+                             :DestinoDeEntretenimiento ,
+                             :DestinoDeportivo ,
+                             :DestinoTuristico ;
+                    :ofrece :actividadDeEntretenimiento1 ,
+                            :actividadDeEntretenimiento3 ,
+                            :actividadDeportiva2 ;
+                    :ofreceActividad :actividadDeEntretenimiento1 ,
+                                     :actividadDeEntretenimiento3 ,
+                                     :actividadDeportiva2 ;
+                    :ubicadoEn :playa1 ;
+                    :ubicadoEnPlaya :playa1 ;
+                    :tieneNombre "Playa Los Frailes" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#destinoTuristico11
+:destinoTuristico11 rdf:type owl:NamedIndividual ,
+                             :DestinoDeportivo ,
+                             :DestinoTuristico ;
+                    :ofrece :actividadDeportiva1 ,
+                            :actividadDeportiva3 ;
+                    :ofreceActividad :actividadDeportiva1 ,
+                                     :actividadDeportiva3 ;
+                    :ubicadoEn :montaña2 ;
+                    :ubicadoEnMontaña :montaña2 ;
+                    :tieneNombre "Montaña" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#destinoTuristico12
+:destinoTuristico12 rdf:type owl:NamedIndividual ,
+                             :DestinoDeportivo ,
+                             :DestinoTuristico ;
+                    :ofrece :actividadDeportiva2 ,
+                            :actividadDeportiva3 ;
+                    :ofreceActividad :actividadDeportiva2 ,
+                                     :actividadDeportiva3 ;
+                    :ubicadoEn :montaña1 ;
+                    :ubicadoEnMontaña :montaña1 ;
+                    :tieneNombre "Pesca Deportiva Cajas" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#destinoTuristico13
+:destinoTuristico13 rdf:type owl:NamedIndividual ,
+                             :DestinoDeportivo ,
+                             :DestinoTuristico ;
+                    :ofrece :actividadDeportiva1 ;
+                    :ofreceActividad :actividadDeportiva1 ;
+                    :ubicadoEn :montaña3 ;
+                    :ubicadoEnMontaña :montaña3 ;
+                    :tieneNombre "Sendero Quishuar" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#destinoTuristico14
+:destinoTuristico14 rdf:type owl:NamedIndividual ,
+                             :DestinoDeportivo ,
+                             :DestinoTuristico ;
+                    :ofrece :actividadDeportiva2 ,
+                            :actividadDeportiva3 ;
+                    :ofreceActividad :actividadDeportiva2 ,
+                                     :actividadDeportiva3 ;
+                    :ubicadoEn :playa2 ;
+                    :ubicadoEnPlaya :playa2 ;
+                    :tieneNombre "Kayak Archidona" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#destinoTuristico15
+:destinoTuristico15 rdf:type owl:NamedIndividual ,
+                             :DestinoDeportivo ,
+                             :DestinoTuristico ;
+                    :ofrece :actividadDeportiva3 ;
+                    :ofreceActividad :actividadDeportiva3 ;
+                    :ubicadoEn :playa3 ;
+                    :ubicadoEnPlaya :playa3 ;
+                    :tieneNombre "Parapente Olón" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#destinoTuristico2
+:destinoTuristico2 rdf:type owl:NamedIndividual ,
+                            :DestinoCultural ,
+                            :DestinoTuristico ;
+                   :ofrece :actividadCultural1 ,
+                           :actividadCultural2 ,
+                           :actividadCultural3 ;
+                   :ofreceActividad :actividadCultural1 ,
+                                    :actividadCultural2 ,
+                                    :actividadCultural3 ;
+                   :ubicadoEn :ciudad2 ;
+                   :ubicadoEnCiudad :ciudad2 ;
+                   :tieneNombre "Mitad del Mundo" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#destinoTuristico3
+:destinoTuristico3 rdf:type owl:NamedIndividual ,
+                            :DestinoCultural ,
+                            :DestinoTuristico ;
+                   :ofrece :actividadCultural2 ;
+                   :ofreceActividad :actividadCultural2 ;
+                   :ubicadoEn :ciudad3 ;
+                   :ubicadoEnCiudad :ciudad3 ;
+                   :tieneNombre "Monumento a la Libertad" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#destinoTuristico4
+:destinoTuristico4 rdf:type owl:NamedIndividual ,
+                            :DestinoDeEntretenimiento ,
+                            :DestinoTuristico ;
+                   :ofrece :actividadDeEntretenimiento2 ;
+                   :ofreceActividad :actividadDeEntretenimiento2 ;
+                   :ubicadoEn :ciudad1 ;
+                   :ubicadoEnCiudad :ciudad1 ;
+                   :tieneNombre "HideOut Disco Club" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#destinoTuristico5
+:destinoTuristico5 rdf:type owl:NamedIndividual ,
+                            :DestinoDeEntretenimiento ,
+                            :DestinoTuristico ;
+                   :ofrece :actividadDeEntretenimiento2 ;
+                   :ofreceActividad :actividadDeEntretenimiento2 ;
+                   :ubicadoEn :ciudad2 ;
+                   :ubicadoEnCiudad :ciudad2 ;
+                   :tieneNombre "Casino S.A." .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#destinoTuristico6
+:destinoTuristico6 rdf:type owl:NamedIndividual ,
+                            :DestinoDeEntretenimiento ,
+                            :DestinoTuristico ;
+                   :ofrece :actividadDeEntretenimiento1 ,
+                           :actividadDeEntretenimiento3 ;
+                   :ofreceActividad :actividadDeEntretenimiento1 ,
+                                    :actividadDeEntretenimiento3 ;
+                   :ubicadoEn :ciudad3 ;
+                   :ubicadoEnCiudad :ciudad3 ;
+                   :tieneNombre "Estacion Ferrocarril" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#destinoTuristico7
+:destinoTuristico7 rdf:type owl:NamedIndividual ,
+                            :DestinoDeportivo ,
+                            :DestinoTuristico ;
+                   :ofrece :actividadDeportiva3 ;
+                   :ofreceActividad :actividadDeportiva3 ;
+                   :ubicadoEn :ciudad1 ;
+                   :ubicadoEnCiudad :ciudad1 ;
+                   :tieneNombre "Cuenca Tenis y Golf Club" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#destinoTuristico8
+:destinoTuristico8 rdf:type owl:NamedIndividual ,
+                            :DestinoDeportivo ,
+                            :DestinoTuristico ;
+                   :ofrece :actividadDeportiva2 ,
+                           :actividadDeportiva3 ;
+                   :ofreceActividad :actividadDeportiva2 ,
+                                    :actividadDeportiva3 ;
+                   :ubicadoEn :ciudad2 ;
+                   :ubicadoEnCiudad :ciudad2 ;
+                   :tieneNombre "Quito Tenis y Golf Club" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#destinoTuristico9
+:destinoTuristico9 rdf:type owl:NamedIndividual ,
+                            :DestinoDeportivo ,
+                            :DestinoTuristico ;
+                   :ofrece :actividadDeportiva1 ;
+                   :ofreceActividad :actividadDeportiva1 ;
+                   :ubicadoEn :ciudad3 ;
+                   :ubicadoEnCiudad :ciudad3 ;
+                   :tieneNombre "Senderismo Nariz del Diablo" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#femenino
+:femenino rdf:type owl:NamedIndividual ,
+                   :Femenino ,
+                   :Genero .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#glamping1
+:glamping1 rdf:type owl:NamedIndividual ,
+                    :Alojamiento ,
+                    :Glamping ;
+           :ofrece :actividadCultural3 ,
+                   :actividadDeEntretenimiento1 ,
+                   :actividadDeportiva1 ,
+                   :actividadDeportiva2 ,
+                   :actividadDeportiva3 ;
+           :ofreceActividad :actividadCultural3 ,
+                            :actividadDeEntretenimiento1 ,
+                            :actividadDeportiva1 ,
+                            :actividadDeportiva2 ,
+                            :actividadDeportiva3 ;
+           :ubicadoEn :montaña1 ;
+           :precio "85.0"^^xsd:double ;
+           :tieneNombre "El Sendero" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#glamping2
+:glamping2 rdf:type owl:NamedIndividual ,
+                    :Alojamiento ,
+                    :Glamping ;
+           :ofrece :actividadCultural3 ,
+                   :actividadDeportiva1 ,
+                   :actividadDeportiva2 ,
+                   :actividadDeportiva3 ;
+           :ofreceActividad :actividadCultural3 ,
+                            :actividadDeportiva1 ,
+                            :actividadDeportiva2 ,
+                            :actividadDeportiva3 ;
+           :ubicadoEn :montaña2 ;
+           :precio "92.0"^^xsd:double ;
+           :tieneNombre "Llullu Llama Mountain Lodge" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#glamping3
+:glamping3 rdf:type owl:NamedIndividual ,
+                    :Alojamiento ,
+                    :Glamping ;
+           :ofrece :actividadCultural3 ,
+                   :actividadDeEntretenimiento3 ,
+                   :actividadDeportiva1 ;
+           :ofreceActividad :actividadCultural3 ,
+                            :actividadDeEntretenimiento3 ,
+                            :actividadDeportiva1 ;
+           :ubicadoEn :montaña3 ;
+           :precio "115.0"^^xsd:double ;
+           :tieneNombre "Secret Garden" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#hotel1
+:hotel1 rdf:type owl:NamedIndividual ,
+                 :Alojamiento ,
+                 :Hotel ,
+                 :HotelDeLujo ;
+        :ofrece :actividadCultural3 ,
+                :actividadDeEntretenimiento2 ;
+        :ofreceActividad :actividadCultural3 ,
+                         :actividadDeEntretenimiento2 ;
+        :ubicadoEn :ciudad1 ;
+        :precio "100.0"^^xsd:double ;
+        :tieneNombre "Four Points by Sheraton Cuenca" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#hotel2
+:hotel2 rdf:type owl:NamedIndividual ,
+                 :Alojamiento ,
+                 :Hotel ,
+                 :HotelEconomico ;
+        :ofrece :actividadDeEntretenimiento2 ;
+        :ofreceActividad :actividadDeEntretenimiento2 ;
+        :ubicadoEn :ciudad1 ;
+        :precio "37.0"^^xsd:double ;
+        :tieneNombre "Selina Cuenca" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#hotel3
+:hotel3 rdf:type owl:NamedIndividual ,
+                 :Alojamiento ,
+                 :Hotel ,
+                 :HotelDeLujo ;
+        :ofrece :actividadCultural1 ,
+                :actividadCultural3 ,
+                :actividadDeEntretenimiento3 ;
+        :ofreceActividad :actividadCultural1 ,
+                         :actividadCultural3 ,
+                         :actividadDeEntretenimiento3 ;
+        :ubicadoEn :ciudad2 ;
+        :precio "82.5"^^xsd:double ;
+        :tieneNombre "Wyndham Garden" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#hotel4
+:hotel4 rdf:type owl:NamedIndividual ,
+                 :Alojamiento ,
+                 :Hotel ,
+                 :HotelEconomico ;
+        :ubicadoEn :ciudad2 ;
+        :precio "22.0"^^xsd:double ;
+        :tieneNombre "Hotel David" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#hotel5
+:hotel5 rdf:type owl:NamedIndividual ,
+                 :Alojamiento ,
+                 :Hotel ,
+                 :HotelDeLujo ;
+        :ofrece :actividadCultural3 ;
+        :ofreceActividad :actividadCultural3 ;
+        :ubicadoEn :ciudad3 ;
+        :precio "89.0"^^xsd:double ;
+        :tieneNombre "Hotel Europa" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#hotel6
+:hotel6 rdf:type owl:NamedIndividual ,
+                 :Alojamiento ,
+                 :Hotel ,
+                 :HotelEconomico ;
+        :ubicadoEn :ciudad3 ;
+        :precio "28.0"^^xsd:double ;
+        :tieneNombre "Hotel Las Americas" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#lancha1
+:lancha1 rdf:type owl:NamedIndividual ,
+                  :Lancha ,
+                  :Transporte ;
+         :ofrecidoPor :playa1 ,
+                      :playa2 ,
+                      :playa3 ;
+         :capacidad 7 ;
+         :viajaPorAgua "true"^^xsd:boolean .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#masculino
+:masculino rdf:type owl:NamedIndividual ,
+                    :Genero ,
+                    :Masculino .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#montaña1
+:montaña1 rdf:type owl:NamedIndividual ,
+                   :Montaña ,
+                   :Ubicacion ;
+          :ofrece :autobus1 ;
+          :ofreceTransporte :autobus1 ;
+          :tiene :destinoTuristico12 ,
+                 :glamping1 ,
+                 :paqueteTuristico5 ;
+          :tieneEstacion "true"^^xsd:boolean ;
+          :tieneNombre "El Cajas" ;
+          :tieneTerminal "true"^^xsd:boolean .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#montaña2
+:montaña2 rdf:type owl:NamedIndividual ,
+                   :Montaña ,
+                   :Ubicacion ;
+          :ofrece :autobus1 ;
+          :ofreceTransporte :autobus1 ;
+          :tiene :destinoTuristico11 ,
+                 :glamping2 ,
+                 :paqueteTuristico5 ;
+          :tieneEstacion "true"^^xsd:boolean ;
+          :tieneNombre "Quilotoa" ;
+          :tieneTerminal "true"^^xsd:boolean .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#montaña3
+:montaña3 rdf:type owl:NamedIndividual ,
+                   :Montaña ,
+                   :Ubicacion ;
+          :ofrece :autobus1 ;
+          :ofreceTransporte :autobus1 ;
+          :tiene :destinoTuristico13 ,
+                 :glamping3 ,
+                 :paqueteTuristico5 ;
+          :tieneEstacion "true"^^xsd:boolean ;
+          :tieneNombre "Volcan Cotopaxi" ;
+          :tieneTerminal "true"^^xsd:boolean .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#paqueteTuristico1
+:paqueteTuristico1 rdf:type owl:NamedIndividual ,
+                            :PaqueteCultural ,
+                            :PaqueteTuristico ;
+                   :destino :destinoTuristico1 ,
+                            :destinoTuristico2 ,
+                            :destinoTuristico3 ;
+                   :esVendidoA :turista5 ;
+                   :ofrece :actividadCultural1 ,
+                           :actividadCultural2 ,
+                           :actividadCultural3 ;
+                   :ofreceActividad :actividadCultural1 ,
+                                    :actividadCultural2 ,
+                                    :actividadCultural3 ;
+                   :ofreceHospedaje :hotel1 ;
+                   :tieneDescuento :descPorTemporada ;
+                   :ubicadoEn :ciudad1 ,
+                              :ciudad2 ,
+                              :ciudad3 ;
+                   :vendidoPor :agencia1 ;
+                   :precioPaqueteTuristico "350.0"^^xsd:double ;
+                   :vendidoEnElMes 7 .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#paqueteTuristico2
+:paqueteTuristico2 rdf:type owl:NamedIndividual ,
+                            :PaqueteDeEntretenimiento ,
+                            :PaqueteTuristico ;
+                   :destino :destinoTuristico4 ,
+                            :destinoTuristico5 ,
+                            :destinoTuristico6 ;
+                   :esVendidoA :turista1 ;
+                   :ofrece :actividadDeEntretenimiento1 ,
+                           :actividadDeEntretenimiento2 ,
+                           :actividadDeEntretenimiento3 ;
+                   :ofreceActividad :actividadDeEntretenimiento1 ,
+                                    :actividadDeEntretenimiento2 ,
+                                    :actividadDeEntretenimiento3 ;
+                   :ubicadoEn :ciudad1 ,
+                              :ciudad2 ,
+                              :ciudad3 ;
+                   :vendidoPor :agencia2 ;
+                   :precioPaqueteTuristico "400.5"^^xsd:double ;
+                   :vendidoEnElMes 10 .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#paqueteTuristico3
+:paqueteTuristico3 rdf:type owl:NamedIndividual ,
+                            :PaqueteDeportivo ,
+                            :PaqueteTuristico ;
+                   :destino :destinoTuristico7 ,
+                            :destinoTuristico8 ,
+                            :destinoTuristico9 ;
+                   :esVendidoA :turista7 ;
+                   :ofrece :actividadDeportiva1 ,
+                           :actividadDeportiva2 ,
+                           :actividadDeportiva3 ;
+                   :ofreceActividad :actividadDeportiva1 ,
+                                    :actividadDeportiva2 ,
+                                    :actividadDeportiva3 ;
+                   :tieneDescuento :descPorTemporada ;
+                   :ubicadoEn :ciudad1 ,
+                              :ciudad2 ,
+                              :ciudad3 ;
+                   :vendidoPor :agencia3 ;
+                   :precioPaqueteTuristico "275.3"^^xsd:double ;
+                   :vendidoEnElMes 12 .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#paqueteTuristico4
+:paqueteTuristico4 rdf:type owl:NamedIndividual ,
+                            :PaqueteDeEntretenimiento ,
+                            :PaqueteDeportivo ,
+                            :PaqueteTuristico ;
+                   :destino :destinoTuristico10 ,
+                            :destinoTuristico14 ,
+                            :destinoTuristico15 ;
+                   :esVendidoA :turista2 ;
+                   :ofrece :actividadDeEntretenimiento1 ,
+                           :actividadDeEntretenimiento3 ,
+                           :actividadDeportiva2 ,
+                           :actividadDeportiva3 ;
+                   :ofreceActividad :actividadDeEntretenimiento1 ,
+                                    :actividadDeEntretenimiento3 ,
+                                    :actividadDeportiva2 ,
+                                    :actividadDeportiva3 ;
+                   :ubicadoEn :playa1 ,
+                              :playa2 ,
+                              :playa3 ;
+                   :precioPaqueteTuristico "240.0"^^xsd:double ;
+                   :vendidoEnElMes 1 .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#paqueteTuristico5
+:paqueteTuristico5 rdf:type owl:NamedIndividual ,
+                            :PaqueteDeportivo ,
+                            :PaqueteTuristico ;
+                   :destino :destinoTuristico11 ,
+                            :destinoTuristico12 ,
+                            :destinoTuristico13 ;
+                   :esVendidoA :turista6 ;
+                   :ofrece :actividadDeportiva1 ,
+                           :actividadDeportiva2 ,
+                           :actividadDeportiva3 ;
+                   :ofreceActividad :actividadDeportiva1 ,
+                                    :actividadDeportiva2 ,
+                                    :actividadDeportiva3 ;
+                   :tieneDescuento :descPorTemporada ;
+                   :ubicadoEn :montaña1 ,
+                              :montaña2 ,
+                              :montaña3 ;
+                   :precioPaqueteTuristico "500.0"^^xsd:double ;
+                   :vendidoEnElMes 2 .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#paqueteTuristico6
+:paqueteTuristico6 rdf:type owl:NamedIndividual ,
+                            :PaqueteCultural ,
+                            :PaqueteDeEntretenimiento ,
+                            :PaqueteDeportivo ,
+                            :PaqueteTuristico ;
+                   :destino :destinoTuristico1 ,
+                            :destinoTuristico14 ,
+                            :destinoTuristico15 ,
+                            :destinoTuristico4 ;
+                   :ofrece :actividadCultural1 ,
+                           :actividadCultural2 ,
+                           :actividadCultural3 ,
+                           :actividadDeEntretenimiento2 ,
+                           :actividadDeportiva2 ,
+                           :actividadDeportiva3 ;
+                   :ofreceActividad :actividadCultural1 ,
+                                    :actividadCultural2 ,
+                                    :actividadCultural3 ,
+                                    :actividadDeEntretenimiento2 ,
+                                    :actividadDeportiva2 ,
+                                    :actividadDeportiva3 ;
+                   :ubicadoEn :ciudad1 ,
+                              :playa2 ,
+                              :playa3 ;
+                   :precioPaqueteTuristico "650.0"^^xsd:double .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#playa1
+:playa1 rdf:type owl:NamedIndividual ,
+                 :Playa ,
+                 :Ubicacion ;
+        :ofrece :autobus1 ,
+                :avion1 ,
+                :lancha1 ;
+        :ofreceTransporte :autobus1 ,
+                          :avion1 ,
+                          :lancha1 ;
+        :tiene :destinoTuristico10 ,
+               :paqueteTuristico4 ,
+               :resort1 ;
+        :tieneAeropuerto "true"^^xsd:boolean ;
+        :tieneEstacion "true"^^xsd:boolean ;
+        :tieneNombre "Chipipe" ;
+        :tienePuerto "true"^^xsd:boolean ;
+        :tieneTerminal "true"^^xsd:boolean .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#playa2
+:playa2 rdf:type owl:NamedIndividual ,
+                 :Playa ,
+                 :Ubicacion ;
+        :ofrece :avion1 ,
+                :lancha1 ;
+        :ofreceTransporte :avion1 ,
+                          :lancha1 ;
+        :tiene :destinoTuristico14 ,
+               :paqueteTuristico4 ,
+               :paqueteTuristico6 ,
+               :resort2 ;
+        :tieneAeropuerto "true"^^xsd:boolean ;
+        :tieneEstacion "true"^^xsd:boolean ;
+        :tieneNombre "San Cristobal" ;
+        :tienePuerto "true"^^xsd:boolean .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#playa3
+:playa3 rdf:type owl:NamedIndividual ,
+                 :Playa ,
+                 :Ubicacion ;
+        :ofrece :autobus1 ,
+                :lancha1 ;
+        :ofreceTransporte :autobus1 ,
+                          :lancha1 ;
+        :tiene :destinoTuristico15 ,
+               :paqueteTuristico4 ,
+               :paqueteTuristico6 ,
+               :resort3 ;
+        :tieneEstacion "true"^^xsd:boolean ;
+        :tieneNombre "Montañita" ;
+        :tienePuerto "true"^^xsd:boolean ;
+        :tieneTerminal "true"^^xsd:boolean .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#resort1
+:resort1 rdf:type owl:NamedIndividual ,
+                  :Alojamiento ,
+                  :Resort ;
+         :ofrece :actividadCultural3 ,
+                 :actividadDeEntretenimiento2 ,
+                 :actividadDeEntretenimiento3 ,
+                 :actividadDeportiva2 ,
+                 :actividadDeportiva3 ;
+         :ofreceActividad :actividadCultural3 ,
+                          :actividadDeEntretenimiento2 ,
+                          :actividadDeEntretenimiento3 ,
+                          :actividadDeportiva2 ,
+                          :actividadDeportiva3 ;
+         :ubicadoEn :playa1 ;
+         :precio "105.0"^^xsd:double ;
+         :tieneNombre "Casablanca Chipipe" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#resort2
+:resort2 rdf:type owl:NamedIndividual ,
+                  :Alojamiento ,
+                  :Resort ;
+         :ofrece :actividadCultural3 ,
+                 :actividadDeEntretenimiento2 ,
+                 :actividadDeEntretenimiento3 ,
+                 :actividadDeportiva2 ,
+                 :actividadDeportiva3 ;
+         :ofreceActividad :actividadCultural3 ,
+                          :actividadDeEntretenimiento2 ,
+                          :actividadDeEntretenimiento3 ,
+                          :actividadDeportiva2 ,
+                          :actividadDeportiva3 ;
+         :ubicadoEn :playa2 ;
+         :precio "127.5"^^xsd:double ;
+         :tieneNombre "Playa Mann" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#resort3
+:resort3 rdf:type owl:NamedIndividual ,
+                  :Alojamiento ,
+                  :Resort ;
+         :ofrece :actividadCultural3 ,
+                 :actividadDeEntretenimiento2 ,
+                 :actividadDeEntretenimiento3 ,
+                 :actividadDeportiva2 ,
+                 :actividadDeportiva3 ;
+         :ofreceActividad :actividadCultural3 ,
+                          :actividadDeEntretenimiento2 ,
+                          :actividadDeEntretenimiento3 ,
+                          :actividadDeportiva2 ,
+                          :actividadDeportiva3 ;
+         :ubicadoEn :playa3 ;
+         :precio "98.5"^^xsd:double ;
+         :tieneNombre "Montañita Estates" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#tren1
+:tren1 rdf:type owl:NamedIndividual ,
+                :Transporte ,
+                :Tren ;
+       :ofrecidoPor :ciudad3 ;
+       :capacidad 450 ;
+       :viajaPorRieles "true"^^xsd:boolean .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#turista1
+:turista1 rdf:type owl:NamedIndividual ,
+                   :Turista ,
+                   :TuristaAdulto ,
+                   :TuristaMayorDeEdad ;
+          :compran :paqueteTuristico2 ;
+          :genero :masculino ;
+          :viajaCon :turista10 ,
+                    :turista11 ,
+                    :turista8 ;
+          :edad 22 ,
+                22 ;
+          :tieneNombre "Mateo" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#turista10
+:turista10 rdf:type owl:NamedIndividual ,
+                    :Turista ,
+                    :TuristaAdulto ,
+                    :TuristaMayorDeEdad ;
+           :genero :femenino ;
+           :viajaCon :turista1 ;
+           :edad 23 ;
+           :tieneNombre "Carolina" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#turista11
+:turista11 rdf:type owl:NamedIndividual ,
+                    :Turista ,
+                    :TuristaAdulto ,
+                    :TuristaMayorDeEdad ;
+           :genero :femenino ;
+           :viajaCon :turista1 ;
+           :edad 30 ;
+           :tieneNombre "Gabriela" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#turista12
+:turista12 rdf:type owl:NamedIndividual ,
+                    :Turista ,
+                    :TuristaMenorDeEdad ;
+           :genero :masculino ;
+           :tieneDescuento :descNiños ;
+           :viajaCon :turista7 ;
+           :edad 8 ;
+           :tieneNombre "Nicolas" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#turista13
+:turista13 rdf:type owl:NamedIndividual ,
+                    :Turista ,
+                    :TuristaAdulto ,
+                    :TuristaMayorDeEdad ;
+           :genero :femenino ;
+           :viajaCon :turista5 ;
+           :edad 47 ;
+           :tieneNombre "Beatriz" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#turista14
+:turista14 rdf:type owl:NamedIndividual ,
+                    :Turista ,
+                    :TuristaMenorDeEdad ;
+           :genero :femenino ;
+           :tieneDescuento :descNiños ;
+           :viajaCon :turista5 ;
+           :edad 10 ;
+           :tieneNombre "Paola" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#turista15
+:turista15 rdf:type owl:NamedIndividual ,
+                    :Turista ,
+                    :TuristaAdulto ,
+                    :TuristaMayorDeEdad ;
+           :genero :masculino ;
+           :viajaCon :turista2 ;
+           :edad 26 ;
+           :tieneNombre "Luis" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#turista16
+:turista16 rdf:type owl:NamedIndividual ,
+                    :Turista ,
+                    :TuristaAdulto ,
+                    :TuristaMayorDeEdad ;
+           :genero :masculino ;
+           :viajaCon :turista2 ;
+           :edad 25 ;
+           :tieneNombre "Carlos" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#turista17
+:turista17 rdf:type owl:NamedIndividual ,
+                    :Turista ,
+                    :TuristaAdulto ,
+                    :TuristaMayorDeEdad ;
+           :genero :masculino ;
+           :viajaCon :turista2 ;
+           :edad 24 ;
+           :tieneNombre "Daniel" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#turista2
+:turista2 rdf:type owl:NamedIndividual ,
+                   :Turista ,
+                   :TuristaAdulto ,
+                   :TuristaMayorDeEdad ;
+          :compran :paqueteTuristico4 ;
+          :genero :masculino ;
+          :viajaCon :turista15 ,
+                    :turista16 ,
+                    :turista17 ;
+          :edad 24 ,
+                24 ;
+          :tieneNombre "Santiago" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#turista3
+:turista3 rdf:type owl:NamedIndividual ,
+                   :Turista ,
+                   :TuristaMenorDeEdad ;
+          :genero :masculino ;
+          :tieneDescuento :descNiños ;
+          :viajaCon :turista5 ;
+          :edad 16 ;
+          :tieneNombre "Sebastian" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#turista4
+:turista4 rdf:type owl:NamedIndividual ,
+                   :Turista ,
+                   :TuristaAdultoMayor ,
+                   :TuristaMayorDeEdad ;
+          :genero :masculino ;
+          :tieneDescuento :descTerceraEdad ;
+          :viajaCon :turista7 ;
+          :edad 68 ;
+          :tieneDesc "true"^^xsd:boolean ;
+          :tieneNombre "Ismael" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#turista5
+:turista5 rdf:type owl:NamedIndividual ,
+                   :Turista ,
+                   :TuristaAdulto ,
+                   :TuristaMayorDeEdad ;
+          :compran :paqueteTuristico1 ;
+          :genero :masculino ;
+          :viajaCon :turista13 ,
+                    :turista14 ,
+                    :turista3 ;
+          :edad 45 ;
+          :tieneNombre "Mauricio" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#turista6
+:turista6 rdf:type owl:NamedIndividual ,
+                   :Turista ,
+                   :TuristaAdulto ,
+                   :TuristaMayorDeEdad ;
+          :compran :paqueteTuristico5 ;
+          :genero :femenino ;
+          :viajaCon :turista9 ;
+          :edad 20 ;
+          :tieneNombre "Inessa" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#turista7
+:turista7 rdf:type owl:NamedIndividual ,
+                   :Turista ,
+                   :TuristaAdultoMayor ,
+                   :TuristaMayorDeEdad ;
+          :compran :paqueteTuristico3 ;
+          :genero :femenino ;
+          :tieneDescuento :descTerceraEdad ;
+          :viajaCon :turista12 ,
+                    :turista4 ;
+          :edad 73 ;
+          :tieneDesc "true"^^xsd:boolean ;
+          :tieneNombre "Cenaida" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#turista8
+:turista8 rdf:type owl:NamedIndividual ,
+                   :Turista ,
+                   :TuristaAdulto ,
+                   :TuristaMayorDeEdad ;
+          :genero :masculino ;
+          :viajaCon :turista1 ;
+          :edad 32 ;
+          :tieneNombre "Andres" .
+
+
+###  http://semanticwebcoronel.kesug.com/turismo/Turismo#turista9
+:turista9 rdf:type owl:NamedIndividual ,
+                   :Turista ,
+                   :TuristaAdulto ,
+                   :TuristaMayorDeEdad ;
+          :genero :masculino ;
+          :viajaCon :turista6 ;
+          :edad 22 ;
+          :tieneNombre "Andres" .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDifferent ;
+  owl:distinctMembers ( :actividadCultural1
+                        :actividadCultural2
+                        :actividadCultural3
+                        :actividadDeEntretenimiento1
+                        :actividadDeEntretenimiento2
+                        :actividadDeEntretenimiento3
+                        :actividadDeportiva1
+                        :actividadDeportiva2
+                        :actividadDeportiva3
+                        :agencia1
+                        :agencia2
+                        :agencia3
+                        :autobus1
+                        :avion1
+                        :ciudad1
+                        :ciudad2
+                        :ciudad3
+                        :descNiños
+                        :descPorTemporada
+                        :descTerceraEdad
+                        :destinoTuristico1
+                        :destinoTuristico10
+                        :destinoTuristico11
+                        :destinoTuristico12
+                        :destinoTuristico13
+                        :destinoTuristico14
+                        :destinoTuristico15
+                        :destinoTuristico2
+                        :destinoTuristico3
+                        :destinoTuristico4
+                        :destinoTuristico5
+                        :destinoTuristico6
+                        :destinoTuristico7
+                        :destinoTuristico8
+                        :destinoTuristico9
+                        :femenino
+                        :glamping1
+                        :glamping2
+                        :glamping3
+                        :hotel1
+                        :hotel2
+                        :hotel3
+                        :hotel4
+                        :hotel5
+                        :hotel6
+                        :lancha1
+                        :masculino
+                        :montaña1
+                        :montaña2
+                        :montaña3
+                        :paqueteTuristico1
+                        :paqueteTuristico2
+                        :paqueteTuristico3
+                        :paqueteTuristico4
+                        :paqueteTuristico5
+                        :playa1
+                        :playa2
+                        :playa3
+                        :resort1
+                        :resort2
+                        :resort3
+                        :tren1
+                        :turista1
+                        :turista10
+                        :turista11
+                        :turista12
+                        :turista13
+                        :turista14
+                        :turista15
+                        :turista16
+                        :turista17
+                        :turista2
+                        :turista3
+                        :turista4
+                        :turista5
+                        :turista6
+                        :turista7
+                        :turista8
+                        :turista9
+                      )
+] .
+
+
+#################################################################
+#    Rules
+#################################################################
+
+<http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#t> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#y> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#x> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#precio2> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#z> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#pre> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#ciudad> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#nombre> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+<http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#turista> rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "S3" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :Turista ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#t>
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#BuiltinAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#builtin> <http://www.w3.org/2003/11/swrlb#greaterThanOrEqual> ;
+                                                                  <http://www.w3.org/2003/11/swrl#arguments> [ rdf:type rdf:List ;
+                                                                                                               rdf:first <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#y> ;
+                                                                                                               rdf:rest [ rdf:type rdf:List ;
+                                                                                                                          rdf:first 65 ;
+                                                                                                                          rdf:rest rdf:nil
+                                                                                                                        ]
+                                                                                                             ]
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :edad ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#t> ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#y>
+                                                                           ] ;
+                                                                 rdf:rest rdf:nil
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :tieneDescuento ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#t> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> :descTerceraEdad
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :tieneDesc ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#t> ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> "true"^^xsd:boolean
+                                                                ] ;
+                                                      rdf:rest rdf:nil
+                                                    ]
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "S11" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :PaqueteTuristico ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#x>
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :vendidoEnElMes ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#x> ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#y>
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#BuiltinAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#builtin> <http://www.w3.org/2003/11/swrlb#equal> ;
+                                                                             <http://www.w3.org/2003/11/swrl#arguments> [ rdf:type rdf:List ;
+                                                                                                                          rdf:first <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#y> ;
+                                                                                                                          rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                     rdf:first 7 ;
+                                                                                                                                     rdf:rest rdf:nil
+                                                                                                                                   ]
+                                                                                                                        ]
+                                                                           ] ;
+                                                                 rdf:rest rdf:nil
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :tieneDescuento ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#x> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> :descPorTemporada
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "S12" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :PaqueteTuristico ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#x>
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#BuiltinAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#builtin> <http://www.w3.org/2003/11/swrlb#equal> ;
+                                                                  <http://www.w3.org/2003/11/swrl#arguments> [ rdf:type rdf:List ;
+                                                                                                               rdf:first <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#y> ;
+                                                                                                               rdf:rest [ rdf:type rdf:List ;
+                                                                                                                          rdf:first 12 ;
+                                                                                                                          rdf:rest rdf:nil
+                                                                                                                        ]
+                                                                                                             ]
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :vendidoEnElMes ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#x> ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#y>
+                                                                           ] ;
+                                                                 rdf:rest rdf:nil
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :tieneDescuento ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#x> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> :descPorTemporada
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "S2" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :Ciudad ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#y>
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :precio ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#x> ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#precio2>
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#BuiltinAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#builtin> <http://www.w3.org/2003/11/swrlb#greaterThan> ;
+                                                                             <http://www.w3.org/2003/11/swrl#arguments> [ rdf:type rdf:List ;
+                                                                                                                          rdf:first <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#precio2> ;
+                                                                                                                          rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                     rdf:first 50.0 ;
+                                                                                                                                     rdf:rest rdf:nil
+                                                                                                                                   ]
+                                                                                                                        ]
+                                                                           ] ;
+                                                                 rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                            rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                        <http://www.w3.org/2003/11/swrl#propertyPredicate> :ubicadoEn ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#x> ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#y>
+                                                                                      ] ;
+                                                                            rdf:rest rdf:nil
+                                                                          ]
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :HotelDeLujo ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#x>
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "S1" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :Ciudad ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#y>
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :precio ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#x> ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#precio2>
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#BuiltinAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#builtin> <http://www.w3.org/2003/11/swrlb#lessThanOrEqual> ;
+                                                                             <http://www.w3.org/2003/11/swrl#arguments> [ rdf:type rdf:List ;
+                                                                                                                          rdf:first <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#precio2> ;
+                                                                                                                          rdf:rest [ rdf:type rdf:List ;
+                                                                                                                                     rdf:first 50.0 ;
+                                                                                                                                     rdf:rest rdf:nil
+                                                                                                                                   ]
+                                                                                                                        ]
+                                                                           ] ;
+                                                                 rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                            rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                                        <http://www.w3.org/2003/11/swrl#propertyPredicate> :ubicadoEn ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#x> ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#y>
+                                                                                      ] ;
+                                                                            rdf:rest rdf:nil
+                                                                          ]
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :HotelEconomico ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#x>
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "S4" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :destino ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#x> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#y>
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#classPredicate> :PaqueteTuristico ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#x>
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :ofreceActividad ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#y> ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#z>
+                                                                           ] ;
+                                                                 rdf:rest rdf:nil
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :ofreceActividad ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#x> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#z>
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "S15" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :ubicadoEn ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#x> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#y>
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#classPredicate> :Playa ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#y>
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :precio ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#x> ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#pre>
+                                                                           ] ;
+                                                                 rdf:rest rdf:nil
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :Resort ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#x>
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "S14" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :ofreceActividad ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#x> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#z>
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :ubicadoEn ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#x> ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#y>
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#classPredicate> :ActividadesDeportivas ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#z>
+                                                                           ] ;
+                                                                 rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                            rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                                        <http://www.w3.org/2003/11/swrl#classPredicate> :Montaña ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#y>
+                                                                                      ] ;
+                                                                            rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                                       rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#propertyPredicate> :precio ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#x> ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#pre>
+                                                                                                 ] ;
+                                                                                       rdf:rest rdf:nil
+                                                                                     ]
+                                                                          ]
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#classPredicate> :Glamping ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#x>
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "S10" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :destino ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#z> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#y>
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :ubicadoEn ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#y> ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#x>
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#classPredicate> :PaqueteTuristico ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#z>
+                                                                           ] ;
+                                                                 rdf:rest rdf:nil
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :ubicadoEn ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#z> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#x>
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "S6" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :tieneNombre ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#ciudad> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#nombre>
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#classPredicate> :Ubicacion ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#ciudad>
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :tieneAeropuerto ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#ciudad> ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument2> "true"^^xsd:boolean
+                                                                           ] ;
+                                                                 rdf:rest rdf:nil
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :ofreceTransporte ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#ciudad> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> :avion1
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "S7" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :tieneNombre ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#ciudad> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#nombre>
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :tieneTerminal ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#ciudad> ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> "true"^^xsd:boolean
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#classPredicate> :Ubicacion ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#ciudad>
+                                                                           ] ;
+                                                                 rdf:rest rdf:nil
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :ofreceTransporte ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#ciudad> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> :autobus1
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "S9" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :tieneEstacionTren ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#ciudad> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> "true"^^xsd:boolean
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :tieneNombre ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#ciudad> ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#nombre>
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#classPredicate> :Ubicacion ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#ciudad>
+                                                                           ] ;
+                                                                 rdf:rest rdf:nil
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :ofreceTransporte ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#ciudad> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> :tren1
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "S8" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :tienePuerto ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#ciudad> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> "true"^^xsd:boolean
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :tieneNombre ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#ciudad> ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#nombre>
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#classPredicate> :Ubicacion ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#ciudad>
+                                                                           ] ;
+                                                                 rdf:rest rdf:nil
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :ofreceTransporte ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#ciudad> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> :lancha1
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "S5" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :edad ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#turista> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#y>
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#BuiltinAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#builtin> <http://www.w3.org/2003/11/swrlb#lessThan> ;
+                                                                  <http://www.w3.org/2003/11/swrl#arguments> [ rdf:type rdf:List ;
+                                                                                                               rdf:first <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#y> ;
+                                                                                                               rdf:rest [ rdf:type rdf:List ;
+                                                                                                                          rdf:first 18 ;
+                                                                                                                          rdf:rest rdf:nil
+                                                                                                                        ]
+                                                                                                             ]
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#classPredicate> :Turista ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#turista>
+                                                                           ] ;
+                                                                 rdf:rest rdf:nil
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :tieneDescuento ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#turista> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> :descNiños
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "" ;
+   rdfs:label "S13" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#BuiltinAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#builtin> <http://www.w3.org/2003/11/swrlb#equal> ;
+                                                       <http://www.w3.org/2003/11/swrl#arguments> [ rdf:type rdf:List ;
+                                                                                                    rdf:first <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#y> ;
+                                                                                                    rdf:rest [ rdf:type rdf:List ;
+                                                                                                               rdf:first 2 ;
+                                                                                                               rdf:rest rdf:nil
+                                                                                                             ]
+                                                                                                  ]
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#classPredicate> :PaqueteTuristico ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#x>
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :vendidoEnElMes ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#x> ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument2> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#y>
+                                                                           ] ;
+                                                                 rdf:rest rdf:nil
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :tieneDescuento ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> <http://www.semanticweb.org/mcall/ontologies/2024/0/untitled-ontology-60#x> ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> :descPorTemporada
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+###  Generated by the OWL API (version 5.1.18) https://github.com/owlcs/owlapi/
